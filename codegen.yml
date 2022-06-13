@@ -1,0 +1,13 @@
+schema: ./src/typeDefs/*.*.ts
+generates:
+  ./graphql.ts:
+    config:
+      mapperTypeSuffix: Model
+      mappers:
+        Cart: "@prisma/client#Cart"
+        CartItem: "@prisma/client#CartItem"
+      useIndexSignature: true
+      contextType: ./src/index#GraphqlContext
+    plugins:
+      - typescript
+      - typescript-resolvers

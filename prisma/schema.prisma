@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Cart{
+    id Int @id() @default(autoincrement()) 
+    items CartItem[]
+  }
+
+model CartItem{
+    id Int @default(autoincrement())
+    image String?
+    name String
+    description String?
+    quantity Int @default(1)
+    price Int
+
+    cartId Int
+    cart Cart @relation(fields: [cartId],references: [id],onDelete:Cascade)
+
+    @@id([id,cartId])
+  }
+
+
